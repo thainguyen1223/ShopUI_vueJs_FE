@@ -1,0 +1,21 @@
+@media only screen and (max-width: 992px) {
+  h2{
+    font-size: 1.5rem;
+  }
+  .product-tab-content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .product-card-name{
+    font-size: 1rem;
+    text-align: center;
+    
+  }
+  .product-btn{
+    display: none;
+  }
+  .product-card-name:hover {
+   background-color: transparent; 
+}
+}

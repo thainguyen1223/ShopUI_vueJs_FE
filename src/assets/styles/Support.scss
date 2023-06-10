@@ -1,0 +1,19 @@
+.support-content {
+    p {
+        color: #666;
+    }
+
+    .support-items:hover {
+        transform: translateY(-15px);
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .support-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+    .support-items{
+        padding: 20px;
+    }
+}

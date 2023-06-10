@@ -1,0 +1,113 @@
+.contact-map {
+  line-height: 1;
+  width: 84%;
+  .map-size {
+    height: 560px;
+    width: 100%;
+  }
+}
+
+.contact-info-wrap {
+  background-color: #f3f3f3;
+  padding: 120px 70px 116px 90px;
+
+  .single-contact-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    .contact-icon {
+      margin-right: 20px;
+      i {
+        cursor: pointer;
+        font-size: 20px;
+        color: #252525;
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        border: 1px solid #252525;
+        text-align: center;
+        border-radius: 100%;
+        transition: all 0.3s ease 0s;
+      }
+    }
+    .contact-info-dec {
+      p {
+        line-height: 1;
+        color: #404040;
+        margin: 0 0 9px;
+        a {
+          color: #404040;
+          &:hover {
+            color: f;
+          }
+        }
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+    &:hover .contact-icon i {
+      background-color: #252525;
+      color: #f3f3f3;
+    }
+  }
+
+  .contact-social {
+    ul {
+      li {
+        margin: 0 10px;
+        display: inline-block;
+        a {
+          font-size: 16px;
+          color: #4d4d4d;
+          &:hover {
+            color: #fa6bff;
+          }
+        }
+      }
+    }
+  }
+}
+
+.contact-form {
+  background-color: #f3f3f3;
+  padding: 50px 110px 50px 110px;
+  .contact-form-style{
+    width: 540px;
+  }
+  .contact-form-style {
+    input,
+    textarea {
+      background: transparent;
+      border: 1px solid #c1c1c1;
+      height: 40px;
+      padding: 2px 14px;
+      margin-bottom: 30px;
+      color: #000;
+    }
+    textarea {
+      padding: 20px 14px;
+      margin-bottom: 0px;
+      height: 175px;
+    }
+
+    button {
+      height: 50px;
+      border: none;
+      background-color: #404040;
+      color: #f3f3f3;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      line-height: 1;
+      padding: 15px 52px;
+      margin-top: 38px;
+      &:hover {
+        background-color: #fff;
+        border: 2px solid #000;
+        color: #000;
+      }
+    }
+  }
+}
