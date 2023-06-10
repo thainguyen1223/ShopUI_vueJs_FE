@@ -127,7 +127,7 @@ export default {
 
         this.filterItems = this.products
         // this.filterItems.push(this.$store.getters.getProducts)
-        // this.updateProductData()
+        this.updateProductData()
     },
     methods: {
  

@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-
+import createPersistedState from 'vuex-persistedstate';
 import axios from "axios";
 const store = createStore({
   strict: process.env.NODE_ENV !== "production",
@@ -171,7 +171,6 @@ const store = createStore({
       }
       try {
         commit("setLoading", true);
-
         const res = await axios.get(
           `http://localhost:3000/clothes/?limit=${limit}&page=${page}&queryFilter=${queryFilter}`
         );
@@ -198,18 +197,18 @@ const store = createStore({
         // console.log(err);
       }
     },
-    async fetchRequireProduct({ commit } ,dataPayload ) {
-      console.log(dataPayload);
-      try {
-        const res = await axios.post(
-          `http://localhost:3000/require-clothes/?limit=3&page=1 ,` + dataPayload 
-        );
-        console.log(res.data.data);
-        commit("setRequireClothes", res.data);
-      } catch (err) {
-        commit("setError", err.message);
-      }
-    },
+    // async fetchRequireProduct({ commit } ,dataPayload ) {
+    //   console.log(dataPayload);
+    //   try {
+    //     const res = await axios.post(
+    //       `http://localhost:3000/require-clothes/?limit=3&page=1 ,` + dataPayload 
+    //     );
+    //     console.log(res.data.data);
+    //     commit("setRequireClothes", res.data);
+    //   } catch (err) {
+    //     commit("setError", err.message);
+    //   }
+    // },
 
     setLoadingState({ commit }, isLoading) {
       commit("setLoading", isLoading);
@@ -230,6 +229,14 @@ const store = createStore({
       commit("setAddWishList", productPlayload);
     },
   },
+  plugins: [
+    createPersistedState({
+      // options
+      key: 'my-app', // key used to store the state in storage
+      storage: window.localStorage, // storage provider (default is localStorage)
+      // other options
+    }),
+  ],
 });
 
 export default store;

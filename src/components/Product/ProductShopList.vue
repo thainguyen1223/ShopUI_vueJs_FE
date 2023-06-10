@@ -2,7 +2,7 @@
     <div v-if="isLoading">
         <SkeletonLoaderList/>
     </div>
-    <div class="product-items"  v-else >
+    <div class="product-items" v-else>
         <div class="product-card_list flex">
             <div class="product-list_img flex justify-center items-center mb-5 mr-9" ref="infinitescrolltrigger">
                 <img :dataSrc="product.images[0]" :alt="product.title" src="" />
@@ -35,9 +35,8 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
-
 </template>
 
 <script>
@@ -45,10 +44,11 @@
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import SkeletonLoaderList from '../SkeletonLoader/SkeletonLoaderList.vue';
+
 // import { computed } from 'vue';
 // import { useStore } from 'vuex';
 export default {
-    props: ["product", 'issVisible'],
+    props: ["product",],
     // setup() {
     //     const store = useStore();
     //     store.dispatch("fetchProducts")
@@ -58,41 +58,38 @@ export default {
     //         products,
     //     }
     // },
-    components:{
-     
-    SkeletonLoaderList
-},
+    components: {
+        SkeletonLoaderList:SkeletonLoaderList
+    },
     data() {
         return {
-            singleQuantity:1,
-            isVisible: false,
+            singleQuantity: 1,
         }
     },
-    mounted(){
-        console.log('dsad');
+    mounted() {
         this.scrollTrigger()
     },
-    updated(){
+    updated() {
         this.scrollTrigger()
     },
-    computed:{
+    computed: {
         isLoading() {
             return this.$store.state.isLoading;
-        },  
+        },
     },
     methods: {
         scrollTrigger() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.intersectionRatio > 0) {
-                        for(let i of entry.target.querySelectorAll('img')){
+                        for (let i of entry.target.querySelectorAll('img')) {
                             let attr = i.getAttribute('dataSrc');
                             i.setAttribute('src', attr);
                         }
                     }
                 });
             })
-            if(this.$refs.infinitescrolltrigger != undefined){
+            if (this.$refs.infinitescrolltrigger != undefined) {
                 observer.observe(this.$refs.infinitescrolltrigger);
             }
         },
@@ -102,7 +99,7 @@ export default {
                 autoClose: 1000,
             });
             this.$store.dispatch('addToCartItem', prod)
-            
+
             console.log(prod)
         },
         addToWishlist(product) {

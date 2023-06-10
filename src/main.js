@@ -39,7 +39,6 @@ library.add(
   );
   import { registerGlobalComponents } from "./utils/import";
   import VueObserveVisibility from 'vue-observe-visibility'
-
   const app = createApp(App)
   
   registerGlobalComponents(app);
