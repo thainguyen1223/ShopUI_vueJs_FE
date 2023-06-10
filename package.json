@@ -19,6 +19,7 @@
     "core-js": "^3.30.2",
     "module_name": "^1.0.0",
     "node-sass": "^8.0.0",
+    "package-name": "^0.1.0",
     "sass-loader": "^13.2.2",
     "style-loader": "^3.3.2",
     "swiper": "^9.3.2",
