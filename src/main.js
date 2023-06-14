@@ -36,15 +36,14 @@ library.add(
   faTableCellsLarge,
   faTableCells,
   faTableList
-  );
-  import { registerGlobalComponents } from "./utils/import";
-  import VueObserveVisibility from 'vue-observe-visibility'
-  const app = createApp(App)
-  
-  registerGlobalComponents(app);
-  app.use(VueObserveVisibility)
-  app.component("font-awesome-icon", FontAwesomeIcon);
-  app.use(router);
-  app.use(store);
-  app.mount("#app");
-  
+);
+import { registerGlobalComponents } from "./utils/import";
+
+const app = createApp(App);
+
+registerGlobalComponents(app);
+
+app.component("font-awesome-icon", FontAwesomeIcon);
+app.use(router);
+app.use(store);
+app.mount("#app");

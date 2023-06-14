@@ -27,10 +27,7 @@
                             </li>
                         </ul>
                     </li>
-
                 </ul>
-
-              
             </div>
         </div>
     </div>
@@ -42,7 +39,7 @@ import { ref } from 'vue';
 import { ITEMS_SHOP_LAYOUT } from '../constants/index'
 export default {
     setup() {
-        const handleOpenSearch1 =ref(false)
+        const handleOpenSearch1 = ref(false)
         const handleToggle = ref(false)
         // console.log(handleToggle);
         const menuMobile = reactive(ITEMS_SHOP_LAYOUT)
@@ -50,7 +47,7 @@ export default {
 
 
         return {
-            menuMobile, subMenuToggle, handleToggle ,handleOpenSearch1
+            menuMobile, subMenuToggle, handleToggle, handleOpenSearch1
         }
     }
 }

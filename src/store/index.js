@@ -1,11 +1,19 @@
 import { createStore } from "vuex";
-import createPersistedState from 'vuex-persistedstate';
+import createPersistedState from "vuex-persistedstate";
 import axios from "axios";
+import SecureLS from "secure-ls";
+const ls = new SecureLS({ isCompression: false });
+
 const store = createStore({
-  strict: process.env.NODE_ENV !== "production",
   state() {
     return {
-      RequireClothes:null,
+      login:{
+        email:"",
+        password:""
+      },
+      productMen:[],
+      productWomen:[],
+      RequireClothes: null,
       isLoading: false,
       productDetail: null,
       products: [],
@@ -16,10 +24,18 @@ const store = createStore({
     };
   },
   getters: {
-    getRequireClothes(state){
-      return state.RequireClothes
-    }
-,
+    getLogin(state){
+      return state.login
+    },
+    getProductMen(state){
+      return state.productMen
+    },
+    getProductWomen(state){
+      return state.productWomen
+    },
+    getRequireClothes(state) {
+      return state.RequireClothes;
+    },
     getTotalItemNo(state) {
       return state.totalItemNo;
     },
@@ -81,8 +97,19 @@ const store = createStore({
     },
   },
   mutations: {
-    setRequireClothes(state , dataPayload){
-      state.RequireClothes =dataPayload
+    setLogin(state ,loginid){
+      state.login =loginid.data
+    },
+    setProductMen(state ,productPlayload){
+      state.productMen =productPlayload.data
+      state.totalItemNo = productPlayload.total;
+    },
+    setProductWomen(state ,productPlayload){
+      state.productWomen =productPlayload.data
+      state.totalItemNo = productPlayload.total;
+    },
+    setRequireClothes(state, dataPayload) {
+      state.RequireClothes = dataPayload;
     },
     setLoading(state, isLoading) {
       state.isLoading = isLoading;
@@ -100,30 +127,33 @@ const store = createStore({
     setError(state, errorPayload) {
       state.error = errorPayload;
     },
-    setUpdateCart(state, updateCartPlayload) {
-      const item = state.cart.find((el) => updateCartPlayload._id === el._id);
+    setUpdateCart(state, payload) {
+      const item = state.cart.find((el) => payload._id === el._id);
       if (item) {
         const price = item.discount
           ? item.price - (item.price * item.discount) / 100
           : item.price;
-        item.cartQuantity = item.cartQuantity + updateCartPlayload.cartQuantity;
+        item.cartQuantity = item.cartQuantity + payload.cartQuantity;
         item.total = item.cartQuantity * price;
       } else {
-        const price = updateCartPlayload.discount
-          ? updateCartPlayload.price -
-            (updateCartPlayload.price * updateCartPlayload.discount) / 100
-          : updateCartPlayload.price;
+        const price = payload.discount
+          ? payload.price - (payload.price * payload.discount) / 100
+          : payload.price;
         state.cart.push({
-          ...updateCartPlayload,
-          cartQuantity: updateCartPlayload.cartQuantity,
+          ...payload,
+          cartQuantity: payload.cartQuantity,
           total: price,
         });
       }
     },
     setAddWishList(state, productPayload) {
-      const item = state.wishlist.find((el) => productPayload.id === el.id);
-      state.wishlist.push(productPayload);
-      return item;
+      const item = state.wishlist.find((el) => productPayload._id === el._id);
+      if (item) {
+        return;
+      }
+      {
+        state.wishlist.push(productPayload);
+      }
     },
     setDecreaseProduct(state, DecreaseProductPayload) {
       const found = state.cart.find(
@@ -137,23 +167,19 @@ const store = createStore({
       found.total = found.cartQuantity * price;
     },
     setRemoveProduct(state, product) {
-      const item = state.cart.filter((item) => product.id !== item.id);
-      console.log(item.id);
+      state.cart = state.cart.filter((item) => {
+        console.log( product._id !== item._id);
+        return product._id !== item._id;
+      });
     },
 
     setRemoveWishlist(state, RemoveWishlistPayload) {
       state.wishlist = state.wishlist.filter((item) => {
-        return RemoveWishlistPayload.id !== item.id;
+        return RemoveWishlistPayload._id !== item._id;
       });
     },
   },
 
-  watch: {
-    updateCartPlayload(newUpdate) {
-      console.log(newUpdate);
-      localStorage.updateCartPlayload = JSON.stringify(newUpdate);
-    },
-  },
   actions: {
     async fetchProducts({ commit }, payload) {
       let queryFilter = "";
@@ -187,6 +213,58 @@ const store = createStore({
         // console.log(err);
       }
     },
+
+    async fetchProductMen({ commit }) {
+      let queryFilter = "men";
+      let limit = 9;
+      let page = 1;
+      // if(payload){
+
+      //   page = payload.page == undefined ? 1:payload.page;
+      //   queryCate = payload.queryCate == undefined ? "":payload.queryCate;
+      // }
+
+      try {
+        commit("setLoading", true);
+        const res = await axios.get(
+          `http://localhost:3000/clothes/?limit=${limit}&page=${page}&queryFilter=${queryFilter}`
+        );
+        // const re = []
+        // let total = Math.ceil(res.data.total / 4);
+        // console.log(total);
+        console.log(res.data.data);
+        commit("setProductMen", res.data);
+        commit("setLoading", false);
+      } catch (err) {
+        commit("setError", err.message);
+        commit("setLoading", false);
+
+        // console.log(err);
+      }
+    },
+    async fetchProductWomen({ commit }) {
+      let queryFilter = "women";
+      let limit = 9;
+      let page = 1;
+
+      try {
+        commit("setLoading", true);
+        const res = await axios.get(
+          `http://localhost:3000/clothes/?limit=${limit}&page=${page}&queryFilter=${queryFilter}`
+        );
+        // const re = []
+        // let total = Math.ceil(res.data.total / 4);
+        // console.log(total);
+        console.log(res.data.data);
+        commit("setProductWomen", res.data);
+        commit("setLoading", false);
+      } catch (err) {
+        commit("setError", err.message);
+        commit("setLoading", false);
+
+        // console.log(err);
+      }
+    },
     async fetchProductDetail({ commit }, { _id }) {
       try {
         const res = await axios.get("http://localhost:3000/clothes/" + _id);
@@ -197,44 +275,56 @@ const store = createStore({
         // console.log(err);
       }
     },
-    // async fetchRequireProduct({ commit } ,dataPayload ) {
-    //   console.log(dataPayload);
-    //   try {
-    //     const res = await axios.post(
-    //       `http://localhost:3000/require-clothes/?limit=3&page=1 ,` + dataPayload 
-    //     );
-    //     console.log(res.data.data);
-    //     commit("setRequireClothes", res.data);
-    //   } catch (err) {
-    //     commit("setError", err.message);
-    //   }
-    // },
+    async fetchRequireProduct({ commit } ,dataPayload ) {
+      console.log(dataPayload);
+      try {
+        const res = await axios.post(
+          `http://localhost:3000/require-clothes/?limit=3&page=1 ,` + dataPayload
+        );
+   
+        commit("setRequireClothes", res.data);
+      } catch (err) {
+        commit("setError", err.message);
+      }
+    },
 
+    async fetchLogin({commit} , {login}){
+      try{
+        const res = await axios.post('http://localhost:3000/auth/login/' + {email:login.email ,password:login.password});
+        console.log(login);
+        console.log(res.data);  
+        commit("setLogin", res.data);
+      }catch (err){
+        commit("setError", err.message);
+      }
+    },
     setLoadingState({ commit }, isLoading) {
       commit("setLoading", isLoading);
     },
-    addToCartItem({ commit }, updateCartPlayload) {
-      commit("setUpdateCart", updateCartPlayload);
-    },
-    decreaseProduct({ commit }, product) {
-      commit("setDecreaseProduct", product);
+    addToCartItem({ commit }, payload) {
+      commit("setUpdateCart", payload);
     },
     removeProductFromCart({ commit }, product) {
       commit("setRemoveProduct", product);
     },
+    decreaseProduct({ commit }, product) {
+      commit("setDecreaseProduct", product);
+    },
+    addToWishlist({ commit }, payload) {
+      commit("setAddWishList", payload);
+    },
     removeProductFromWishlist({ commit }, product) {
       commit("setRemoveWishlist", product);
-    },
-    addToWishlist({ commit }, productPlayload) {
-      commit("setAddWishList", productPlayload);
     },
   },
   plugins: [
     createPersistedState({
-      // options
-      key: 'my-app', // key used to store the state in storage
-      storage: window.localStorage, // storage provider (default is localStorage)
-      // other options
+      key: "Shop-ui.com",
+      storage: {
+        getItem: key => ls.get(key),
+        setItem: (key, value) => ls.set(key, value),
+        removeItem: key => ls.remove(key)
+      },
     }),
   ],
 });

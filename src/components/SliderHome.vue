@@ -1,6 +1,6 @@
 <template>
     <div class="slider mb-8">
-        <swiper :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }" :modules="modules" :autoplay="autoplay" :options="swiperOption" class="swiper-slider">
+        <swiper :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }" :modules="modules" class="swiper-slider">
             <swiper-slide lazy="true" v-for="product in products" :key="product.id" class="single-slider">
                 <div class="container mx-auto my-auto px-5 slider-home flex">
                     <div class="slider-active acitve flex ">
@@ -23,9 +23,9 @@
                             </div>
                         </div>
                         <div class="slider-img top-down">
-                       
-                            <img :src="product.images[0]" alt="user" class="mx-3 mt-2"  loading="lazy"/>
-                   
+
+                            <img :src="product.images[0]" alt="user" class="mx-3 mt-2" loading="lazy" />
+
                         </div>
                     </div>
                 </div>
@@ -46,28 +46,30 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation } from 'swiper';
+import { Autoplay, Navigation } from 'swiper';
 export default {
-    props:[
-        'isVisible'
-    ],
+
     components: {
         Swiper,
         SwiperSlide,
     },
     data() {
         return {
-            modules: [Navigation],
-            autoplay:{
-                delay: 3000,
-            }
+
+            modules: [
+                Navigation,
+                Autoplay
+                 ]
+
+
         }
     },
-   
+    mounted() {
+        this.products
+    },
     computed: {
         products() {
-        
-            return this.$store.getters.getProducts.slice(0 ,3 );
+            return this.$store.getters.getProducts.slice(0, 3);
         },
     }
 };

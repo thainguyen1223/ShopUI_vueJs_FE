@@ -111,14 +111,14 @@
                                 </h3>
                             </div>
                         </div>
-                        <div class="tab-item text-3xl">
+                        <!-- <div class="tab-item text-3xl">
                             <div class="flex items-center">
                                 <i class='bx bx-message-rounded-dots mr-3'></i>
                                 <h3>
                                     Reviews
                                 </h3>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="tab-content mb-20 container flex justify-center">
                         <div class="tab-pane active  flex justify-center">
@@ -131,8 +131,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="tab-pane flex justify-center ">
-
+                        <!-- <div class="tab-pane flex justify-center ">
                             <div class="review-wrap flex justify-around">
                                 <div class="single-review flex ">
                                     <div class="review-img">
@@ -182,7 +181,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

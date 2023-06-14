@@ -8,32 +8,6 @@ export const ITEMS_SHOP_LAYOUT = [
   {
     url: "/shop",
     title: "Shop",
-    icon: "fa-solid fa-angle-down",
-    submenu: [
-      {
-        url: "",
-        title: "shop layout",
-        submenu: [
-          {
-            url: "/shop",
-            title: "shop grid standard",
-          },
-          {
-            url: "/shop-list-standard",
-            title: "shop list standard",
-          },
-          {
-            url: "/shop-list-full-width",
-            title: "shop list full width",
-          },
-        ],
-      },
-      {
-        url: "",
-        title: "product details",
-      
-      },
-    ],
   },
   {
     url: "",

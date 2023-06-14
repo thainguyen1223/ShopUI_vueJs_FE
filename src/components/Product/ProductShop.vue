@@ -90,7 +90,6 @@ export default {
         return {
             currentPage: 1,
             perPage: 9,
-        
             layout: "list",
             filterItems: [],
             categorySelect: '',
@@ -106,18 +105,7 @@ export default {
         products() {
             return this.$store.getters.getProducts;
         },
-        // getItems() {
-        //     let start = (this.currentPage - 1) * this.perPage;
-        //     let end = this.currentPage * this.perPage;
-        //     return this.filterItems.slice(start ,end);
-        // },
-        // filteredList() {
-        //     return this.filterItems.filter(product => {
-        //         return product.title.toLowerCase().includes(this.search.toLowerCase())
-
-        //     })
-
-        // },
+       
         totalPages() {
             return Math.ceil(this.$store.getters.getTotalItemNo / this.perPage);
         },
@@ -126,8 +114,8 @@ export default {
     mounted() {
 
         this.filterItems = this.products
-        // this.filterItems.push(this.$store.getters.getProducts)
-        this.updateProductData()
+        // this.filterItems =this.$store.dispatch('fetchProducts')
+        // this.updateProductData()
     },
     methods: {
  

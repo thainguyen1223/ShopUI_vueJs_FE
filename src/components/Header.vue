@@ -20,20 +20,8 @@
             <div class="search-content flex items-center justify-center" :class="{ active: handleOpenSearch }">
               <form class="form-search flex" >
                 <input type="text" placeholder="Search" class="search-input" v-model="search"  />
-                
                 <button class="button-search"><font-awesome-icon icon="fa-soid fa-magnifying-glass" /></button>
-
               </form>
-
-              <!-- <div class="wrapper">
-                <div class="card" v-for="item in filteredList" :key="item">
-                 
-                    {{ item.title }}
-               
-
-
-                </div>
-              </div> -->
             </div>
           </div>
 
@@ -81,14 +69,16 @@
       </div>
     </div>
   </header>
-  <NavigationMoblie :class="{ 'show-mobile-menu': handleOpenNav }" @toggleAsideMenu="handleOpenNav = !handleOpenNav" />
+  <NavigationMoblie :class="{ 'show-mobile-menu': handleOpenNav }"
+   @toggleAsideMenu="handleOpenNav = handleOpenNav" 
+  />
 </template>
 
 <script>
 
 import Navigation from "../components/Navigation.vue";
 import NavigationMoblie from "./NavigationMobile.vue";
-import { ref } from "vue";
+
 
 import MiniCart from "./MiniCart.vue";
 
@@ -99,18 +89,11 @@ export default {
     MiniCart: MiniCart
   },
 
-  setup() {
-    // store.dispatch("fetchProducts")
-
-    const handleOpenSearch = ref(false);
-    const handOpenCart = ref(false);
-    const handleOpenNav = ref(false);
- 
-
-    
-    return {
-      handleOpenSearch, handleOpenNav, handOpenCart 
-
+  data(){
+    return{
+      handleOpenSearch:false,
+      handOpenCart:false,
+      handleOpenNav:false
     }
   },
   computed:{

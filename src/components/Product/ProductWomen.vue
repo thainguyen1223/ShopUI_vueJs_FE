@@ -5,12 +5,12 @@
                 <h2>FASHION WOMEN</h2>
             </div>
             <div class="product-tab-content grid grid-cols-4 gap 4">
-                <div v-for="(product, i) in filterItems" :key="i">
+                <div v-for="(product, i) in products" :key="i">
                     <Product :product="product" />
                 </div>
             </div>  
 
-            <div class="section-footer">
+            <div class="section-footer mt-10 mb-10">
                 <RouterLink to="./Shop" class="btn-flat btn-hover">view all</RouterLink>
             </div>
         </div>
@@ -19,36 +19,22 @@
 
 <script>
 import Product from './Product.vue';
-
+import { useStore } from 'vuex';
+import { computed } from 'vue';
 export default {
     components: {
         Product: Product,
     },
-    data(){
-        return{
-            filterItems: [],
-        }
-    },
-    mounted(){
-        this.updateProductData()
-        this.filterItems =this.products
-    },
-
-    computed: {
-        products() {
-            return this.$store.getters.getProducts.slice(0,8);
-        },
-    },
-    methods:{
-        updateProductData() {
-            this.filterItems =this.$store.getters.getProducts.slice(0,8);
-            this.$store.dispatch('fetchProducts', {
-                queryFilter: this.filterItems,
-                page: 1
-            })
+   
+    setup() {
+        const store = useStore();
+        store.dispatch("fetchProductWomen")
+        const products = computed(() => store.state.productWomen.slice(0,8));
+        return {
+            products,
         
-        },
-    }
+        };
+    },
 }
 
 </script>
