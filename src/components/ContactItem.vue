@@ -1,6 +1,6 @@
 <template>
-    <div class="contactItem-wrap">
-        <div class="container mx-auto mt-20">
+    <div class="contactItem-wrap mt-10" >
+        <div class="container mx-auto ">
             <div class="flex justify-center w-full flex-col mb-20">
                 <div class="flex justify-center">
                     <div class="contact-map mb-6">
@@ -10,7 +10,7 @@
                             referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
-                <div class="flex justify-center gap-5">
+                <div class="contact-FeedBack flex justify-center gap-5">
                     <div class="contact-info-wrap">
                         <div class="single-contact-info">
                             <div class="contact-icon">
@@ -49,24 +49,26 @@
                         </div>
                     </div>
                     <div class="contact-form">
-                        <h2 class="mb-8 font-medium text-2xl mb-9">Get In Touch</h2>
+                        <h2 class="mb-8 font-medium text-2xl mb-9">Get In FeedBack</h2>
                         <form class="contact-form-style">
                             <div class="flex flex-col">
-                                <div class="flex justify-between">
+                                <div class="contact-flex flex justify-between">
                                     <div class="contact-touch">
-                                        <input name="name" placeholder="Name*" type="text">
+                                        <input name="name" placeholder="Name*" type="text" v-model="feedback.name">
                                     </div>
                                     <div class="contact-touch">
-                                        <input name="email" placeholder="Email*" type="email">
+                                        <input name="email" placeholder="Email*" type="email" v-model="feedback.email">
                                     </div>
 
                                 </div>
                                 <div class="contact-touch">
-                                    <input name="subject" placeholder="Subject*" type="text" class="w-full">
+                                    <input name="subject" placeholder="Subject*" type="text" class="w-full"
+                                        v-model="feedback.subject">
                                 </div>
                                 <div class="contact-touch">
-                                    <textarea name="message" placeholder="Your Message*" class="w-full"></textarea>
-                                    <button class="submit" type="submit">SEND</button>
+                                    <textarea name="message" placeholder="Your Message*" class="w-full"
+                                        v-model="feedback.message"></textarea>
+                                    <div class="submit" type="submit" @click="summitFeedBack">SEND</div>
                                 </div>
                             </div>
                         </form>
@@ -78,3 +80,42 @@
 </template>
 
 <style src="../assets/styles/base.scss" lang="scss"></style>
+
+
+<script>
+import axios from 'axios';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+export default {
+    data() {
+        return {
+            feedback: {
+                name: "",
+                email: "",
+                subject: "",
+                message: ""
+            }
+        }
+    },
+    methods: {
+        async summitFeedBack() {
+            const feedback = { ...this.feedback }
+            console.log(feedback);
+            try {
+                const res = await axios.post('http://localhost:3000/feedback',
+                    feedback)
+                res.data
+                toast.success('Successful order', {
+                    autoClose: 1000,
+                });
+                console.log(res.data);
+            } catch (err) {
+                console.log(err);
+                toast.error('Failed order', {
+                    autoClose: 1000,
+                });
+            }
+        }
+    }
+}
+</script>

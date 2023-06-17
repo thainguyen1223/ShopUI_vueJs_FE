@@ -102,6 +102,8 @@
 
 <script>
 import axios from 'axios';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
     data() {
         return {
@@ -112,7 +114,7 @@ export default {
                 phone: "",
                 email: "",
                 additional: "",
-
+                arraySp: []
             }
         }
     },
@@ -126,16 +128,30 @@ export default {
     },
     methods: {
         async sendPostRequest() {
-            const post = this.posts
-            const product =this.products
-            console.log(product);
+            const post = { ...this.posts };
+            const product = [...this.products]
+            let temp = []
+            for (let i of product) {
+                temp.push({
+                    id: i._id,
+                    sl: i.cartQuantity
+                })
+            }
+            post.arraySp = [...temp]
+            console.log(post);
             try {
                 const res = await axios.post('http://localhost:3000/require-clothes/',
-                    { firstname: post.firstname, lastname: post.lastname, phone: post.phone, street: post.street, email: post.email, additional: post.additional  ,product:product.title})
+                    post)
                 res.data
+                toast.success('Successful order', {
+                    autoClose: 1000,
+                });
                 console.log(res.data);
             } catch (err) {
                 console.log(err);
+                toast.error('Failed order', {
+                    autoClose: 1000,
+                });
             }
         }
     },

@@ -183,6 +183,7 @@ const store = createStore({
   actions: {
     async fetchProducts({ commit }, payload) {
       let queryFilter = "";
+      let searchValue =""
       let limit = 9;
       let page = 1;
       // if(payload){
@@ -194,11 +195,13 @@ const store = createStore({
         page = payload.page == undefined ? 1 : payload.page;
         queryFilter =
           payload.queryFilter == undefined ? "" : payload.queryFilter;
+          searchValue =
+          payload.searchValue == undefined ? "" : payload.searchValue;
       }
       try {
         commit("setLoading", true);
         const res = await axios.get(
-          `http://localhost:3000/clothes/?limit=${limit}&page=${page}&queryFilter=${queryFilter}`
+          `http://localhost:3000/clothes/?limit=${limit}&page=${page}&queryFilter=${queryFilter}&searchValue=${searchValue}`
         );
         // const re = []
         // let total = Math.ceil(res.data.total / 4);

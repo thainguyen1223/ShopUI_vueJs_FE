@@ -1,6 +1,8 @@
 <template>
-    <Breadcrumb pageTitle="Contact us"/>
-    <ContactItem/>
+    <div>
+        <Breadcrumb pageTitle="Contact us"/>
+        <ContactItem/>
+    </div>
 </template>
 
 <script>

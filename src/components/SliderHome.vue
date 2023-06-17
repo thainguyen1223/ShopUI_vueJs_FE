@@ -2,7 +2,7 @@
     <div class="slider mb-8">
         <swiper :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }" :modules="modules" class="swiper-slider">
             <swiper-slide lazy="true" v-for="product in products" :key="product.id" class="single-slider">
-                <div class="container mx-auto my-auto px-5 slider-home flex">
+                <div class="container mx-auto my-auto slider-home flex">
                     <div class="slider-active acitve flex ">
                         <div class="slider-info flex flex-col justify-center">
                             <div class="info-content flex flex-col items-start">
@@ -10,7 +10,7 @@
                                     {{ product.title }}
                                 </h3>
 
-                                <p class="top-down trans-delay-0-4">
+                                <p class="trans-delay-0-4">
                                     {{ product.description }}
                                 </p>
                                 <div class="top-down trans-delay-0-6">
@@ -22,7 +22,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="slider-img top-down">
+                        <div class="slider-img">
 
                             <img :src="product.images[0]" alt="user" class="mx-3 mt-2" loading="lazy" />
 

@@ -7,7 +7,12 @@
                 </div>
                 <div class="shop-product flex flex-col">
                     <div class="shop-top-product flex justify-between px-2">
-
+                        <div class="search-product flex">
+                            <input type="text" placeholder="Search Product" v-model="search"
+                                @input="handleSearch" />
+                            <div class="button-search"><font-awesome-icon icon="fa-soid fa-magnifying-glass" />
+                            </div>
+                        </div>
                         <div class="shop-select">
                             <select v-model="selectedPrice">
                                 <option value="default">Default</option>
@@ -32,14 +37,14 @@
                     <div class="shop-bottom-product mt-8">
                         <div class="product-layout">
                             <div class=" grid grid-cols-3 gap-4 threeColumn" v-if="layout === 'threeColumn'">
-                           
+
                                 <div v-for="product in filterItems" :key="product.id">
-                                    <Product :product="product" :layout="layout"  />
+                                    <Product :product="product" :layout="layout" />
                                 </div>
                             </div>
 
                             <div class="flex flex-col list" v-if="layout === 'list'">
-                        
+
                                 <div v-for="product in filterItems" :key="product.id">
                                     <ProductShopList :product="product" :layout="layout" />
                                 </div>
@@ -50,7 +55,7 @@
                             <div class="grid grid-cols-2  twoColumn" v-if="layout === 'twoColumn'">
                                 <div v-for="product in filterItems" :key="product.id">
                                     <ProductTwoColumn :product="product" :layout="layout" />
-                            
+
                                 </div>
                             </div>
                         </div>
@@ -84,10 +89,11 @@ export default {
         ProductShopList: ProductShopList,
         ProductTwoColumn: ProductTwoColumn,
         SliderBarShop: SliderBarShop,
-      
+
     },
     data() {
         return {
+            search: "",
             currentPage: 1,
             perPage: 9,
             layout: "list",
@@ -98,14 +104,14 @@ export default {
     },
 
     computed: {
- 
+
         total() {
             return this.$store.getters.getTotalItemNo
         },
         products() {
             return this.$store.getters.getProducts;
         },
-       
+
         totalPages() {
             return Math.ceil(this.$store.getters.getTotalItemNo / this.perPage);
         },
@@ -114,11 +120,18 @@ export default {
     mounted() {
 
         this.filterItems = this.products
-        // this.filterItems =this.$store.dispatch('fetchProducts')
+        this.filterItems = this.$store.dispatch('fetchProducts')
         // this.updateProductData()
     },
     methods: {
- 
+        handleSearch() {
+            const searhValue = this.search
+
+            this.$store.dispatch('fetchProducts', {
+                searchValue: searhValue,
+
+            })
+        },
         paginateClickCallback(page) {
             this.currentPage = page
 

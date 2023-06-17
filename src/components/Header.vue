@@ -13,17 +13,18 @@
           <Navigation />
         </div>
         <div class="header-right-wrap flex items-center justify-between ">
-          <div class="header-search">
+          <!-- <div class="header-search">
             <button class="search-active" @click="handleOpenSearch = !handleOpenSearch">
               <font-awesome-icon icon="fa-soid fa-magnifying-glass" class="text-lg mt-2" />
             </button>
             <div class="search-content flex items-center justify-center" :class="{ active: handleOpenSearch }">
-              <form class="form-search flex" >
-                <input type="text" placeholder="Search" class="search-input" v-model="search"  />
-                <button class="button-search"><font-awesome-icon icon="fa-soid fa-magnifying-glass" /></button>
+              <form class="form-search flex">
+                <input type="text" placeholder="Search" class="search-input"  />
+                <div class="button-search" ><font-awesome-icon icon="fa-soid fa-magnifying-glass" />
+                </div>
               </form>
             </div>
-          </div>
+          </div> -->
 
           <div class="account-setting">
             <button class="account-setting-active">
@@ -69,16 +70,13 @@
       </div>
     </div>
   </header>
-  <NavigationMoblie :class="{ 'show-mobile-menu': handleOpenNav }"
-   @toggleAsideMenu="handleOpenNav = handleOpenNav" 
-  />
+  <NavigationMoblie :class="{ 'show-mobile-menu': handleOpenNav }" @toggleAsideMenu="handleOpenNav = !handleOpenNav" v-if="handleOpenNav" />
 </template>
 
 <script>
 
 import Navigation from "../components/Navigation.vue";
 import NavigationMoblie from "./NavigationMobile.vue";
-
 
 import MiniCart from "./MiniCart.vue";
 
@@ -89,21 +87,36 @@ export default {
     MiniCart: MiniCart
   },
 
-  data(){
-    return{
-      handleOpenSearch:false,
-      handOpenCart:false,
-      handleOpenNav:false
+  data() {
+    return {
+   
+      handOpenCart: false,
+      handleOpenNav: false,
+
     }
   },
-  computed:{
-    cartItemCount(){
+  computed: {
+    cartItemCount() {
       return this.$store.getters.getCartItemCount
     },
-    wishlistItemCount(){
+    wishlistItemCount() {
       return this.$store.getters.getWishlistItemCount
+    },
+  },
+
+
+  methods: {
+    resSearch() {
+      const searhValue =this.search
+      
+      this.$store.dispatch('fetchProducts', {
+        searchValue: searhValue,
+ 
+      })
+
     }
   }
+
 }
 </script>
 <style src="../assets/styles/base.scss" lang="scss" ></style>
