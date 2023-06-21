@@ -1,12 +1,11 @@
 <template>
     <div class="ProductDetail-wrap" v-if="productDetail">
         <Breadcrumb :pageTitle="productDetail.title" />
-
         <div class="container mx-auto">
             <div class="productDetail-content flex">
                 <div class="productDetail-list">
                     <swiper :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }" :modules="modules"
-                        :options="swiperOption" class="swiper-productDetail" ref="swiperTop">
+                        :options="swiperOption" class="swiper-slider" ref="swiperTop">
                         <SwiperSlide v-for="image in productDetail.images" :key="image">
                             <img :src="image" :alt="productDetail.title">
                         </SwiperSlide>
@@ -18,8 +17,7 @@
                                 <i class='bx bx-chevron-right'></i>
                             </div>
                         </div>
-                    </swiper>
-
+                    </swiper>   
                     <Swiper class="productDetail-box mt-8" ref="swiperThumbs">
                         <div class="productDetail-img-list flex items-center justify-center">
                             <div class="productDetail-img-item" v-for="image in productDetail.images" :key="image">
@@ -30,6 +28,7 @@
                 </div>
 
                 <div class="productDetail-info flex flex-col justify-start">
+      
                     <h1 class="text-3xl font-bold">
                         {{ productDetail ? productDetail.title : '' }}
                     </h1>
@@ -94,8 +93,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="description-review-area mt-9">
                 <div class="container mx-auto px-3">
                     <div class="tabs flex py-8 justify-center">
@@ -159,7 +156,7 @@ export default {
     data() {
         return {
             singleQuantity: 1,
-            modules: [Navigation],
+              modules: [Navigation],
 
         }
     },
@@ -174,11 +171,13 @@ export default {
     //                 console.log(swiperTop);
     //         })
     //     },
-
+        created(){
+            this.$store.dispatch("fetchProductDetail", { _id: this.$route.params._id })
+        },
     computed: {
-        productDetail() {
+        productDetail(){
             return this.$store.state.productDetail
-        }
+        },
     },
     methods: {
         discountedPrice(product) {

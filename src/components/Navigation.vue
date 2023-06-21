@@ -9,7 +9,7 @@
                 <li class="text-base mega-dropdowns">
                     <router-link to="/Shop">Shop
                     </router-link>
-               
+
                 </li>
                 <!-- end mega menu -->
                 <li class="text-base  mega-dropdown">
@@ -33,14 +33,14 @@
                                         <li>
                                             <RouterLink to="/Wishlist">Wishlist</RouterLink>
                                         </li>
-                            
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </li>
-            
+
                 <li class="text-base">
                     <RouterLink to="/Contact">Contact</RouterLink>
                 </li>

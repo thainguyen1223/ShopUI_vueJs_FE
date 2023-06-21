@@ -21,36 +21,19 @@ export const ITEMS_SHOP_LAYOUT = [
         url: "/checkout",
         title: "Checkout",
       },
+      {
+        url: "/wishlist",
+        title: "Wishlist",
+      },
     
     ],
   },
-
   {
     url: "/contact",
     title: "Contact",
   },
 ];
 
-export const ITEMS_SLIDER_LAYOUT = [
-  {
-    name: "JBL TUNE 750TNC",
-    title: "Next-gen design",
-    dec: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati dolor commodi dignissimosculpa,eaque eos necessitatibus possimus veniam, cupiditate rerum deleniti? Libero, ducimus",
-    img: "../assets/images/JBL_E55BT_KEY_RED_6063_FS_x1-1605x1605px.webp",
-  },
-  {
-    name: "JBL JR 310BT",
-    title: "Consectetur Elit",
-    dec: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati dolor commodi dignissimosculpa,eaque eos necessitatibus possimus veniam, cupiditate rerum deleniti? Libero, ducimus",
-    img: "../assets/images/JBL_JR 310BT_Product Image_Hero_Skyblue.png",
-  },
-  {
-    name: "JBL Quantum ONE",
-    title: " Ipsum dolor",
-    dec: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati dolor commodi dignissimosculpa,eaque eos necessitatibus possimus veniam, cupiditate rerum deleniti? Libero, ducimus",
-    img: "../assets/images/JBL_E55BT_KEY_BLACK_6175_FS_x1-1605x1605px.png",
-  },
-];
 
 export const ITEMS_SUPPORT_LAYOUT = [
   {

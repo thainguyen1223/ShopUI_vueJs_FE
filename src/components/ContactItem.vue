@@ -1,5 +1,5 @@
 <template>
-    <div class="contactItem-wrap mt-10" >
+    <div class="contactItem-wrap mt-10">
         <div class="container mx-auto ">
             <div class="flex justify-center w-full flex-col mb-20">
                 <div class="flex justify-center">
@@ -48,30 +48,29 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="contact-form">
-                        <h2 class="mb-8 font-medium text-2xl mb-9">Get In FeedBack</h2>
-                        <form class="contact-form-style">
-                            <div class="flex flex-col">
-                                <div class="contact-flex flex justify-between">
-                                    <div class="contact-touch">
-                                        <input name="name" placeholder="Name*" type="text" v-model="feedback.name">
-                                    </div>
-                                    <div class="contact-touch">
-                                        <input name="email" placeholder="Email*" type="email" v-model="feedback.email">
-                                    </div>
-
+                    <div class="contact-form-wrap">
+                        <h2 class=" font-medium text-2xl ">Get In FeedBack</h2>
+                        <div class="contact-form-style flex-col mb-5 mt-10">
+                            <div class="contact-flex flex justify-between mb-5 ">
+                                <div class="contact-name">
+                                    <input name="name" placeholder="Name*" type="text" v-model="feedback.name">
                                 </div>
-                                <div class="contact-touch">
-                                    <input name="subject" placeholder="Subject*" type="text" class="w-full"
-                                        v-model="feedback.subject">
-                                </div>
-                                <div class="contact-touch">
-                                    <textarea name="message" placeholder="Your Message*" class="w-full"
-                                        v-model="feedback.message"></textarea>
-                                    <div class="submit" type="submit" @click="summitFeedBack">SEND</div>
+                          
+                                <div class="contact-email">
+                                    <input name="email" placeholder="Email*" type="email" v-model="feedback.email">
                                 </div>
                             </div>
-                        </form>
+
+                            <div class="contact-subject mb-5">
+                                <input name="subject" placeholder="Subject*" type="text" class="w-full outline-none"
+                                    v-model="feedback.subject">
+                            </div>
+                            <div class="contact-message">
+                                <textarea name="message" placeholder="Your Message*" class="w-full"
+                                    v-model="feedback.message"></textarea>
+                                <div class="submit" type="submit" @click="summitFeedBack">SEND</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

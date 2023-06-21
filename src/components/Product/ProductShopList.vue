@@ -3,7 +3,7 @@
         <SkeletonLoaderList/>
     </div>
     <div class="product-items" v-else>
-        <div class="product-card_list flex">
+        <div class="product-card_list py-3 flex">
             <div class="product-list_img flex justify-center items-center mb-5 mr-9" ref="infinitescrolltrigger">
                 <img :dataSrc="product.images[0]" :alt="product.title" src="" />
                 <img class="hover-image" :dataSrc="product.images[1]" :alt="product.title" src="" />
