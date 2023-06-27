@@ -13,60 +13,60 @@
 
             <div class="navigation-moblie-inner">
                 <ul class="mobile-menu">
-                    <!-- <li v-for="(menu, i) in menuMobile " class="mobile-menu-active" :key="i"
-                        @click="handleToggle = !handleToggle">
-                        <router-link :to="menu.url">
-                            {{ menu.title }}
-                        </router-link>
-                        <span class='submenu-toggle' v-if="menu.submenu">
-                            <font-awesome-icon icon="fa-solid fa-angle-down" />
-                        </span>
-                        <ul class="submenu" v-if="menu.submenu" :class="{ active: handleToggle }">
-                            <li v-for='(menu, i) in menu.submenu' :key='i'>
-                                <router-link :to="menu.url"> {{ menu.title }} </router-link>
-                            </li>
-                        </ul>
-                    </li> -->
-                    <li class="text-base "><router-link to="/">Home
+
+                    <li class="text-base leading-10"><router-link to="/">Home
                         </router-link>
                     </li>
-                    <!-- mega menu -->
-                    <li class="text-base">
+
+                    <li class="text-base leading-10">
                         <router-link to="/Shop">Shop
                         </router-link>
 
                     </li>
-                    <!-- end mega menu -->
-                    <li class="text-base mobile-menu-active">
-                        <RouterLink to="">
-                            Pages
-                            <font-awesome-icon icon="fa-solid fa-angle-down" class="icon_style" />
-                        </RouterLink>
-                        <div class="submenu">
-                            <div>
-                                <div class="flex flex-col">
-                                    <div class="box">
-                                        <ul>
-                                            <li>
-                                                <RouterLink to="/Cart">
-                                                    Cart
-                                                </RouterLink>
-                                            </li>
-                                            <li>
-                                                <RouterLink to="/Checkout">Checkout</RouterLink>
-                                            </li>
-                                            <li>
-                                                <RouterLink to="/Wishlist">Wishlist</RouterLink>
-                                            </li>
+                    <li class="text-base leading-10">
+                        <router-link to="/Checkout">Checkout
+                        </router-link>
 
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    </li>
+                    <li class="text-base leading-10">
+                        <router-link to="/Cart">Cart
+                        </router-link>
+
                     </li>
 
-                    <li class="text-base">
+                    <li class="text-base leading-10">
+                        <router-link to="/Shop">Wishlist
+                        </router-link>
+
+                    </li>
+
+                    <!-- <li class="text-base mobile-menu-active">
+                        <RouterLink to="">
+                            Pages
+
+                        </RouterLink>
+                        <div class="submenu">
+                            <div class="flex flex-col">
+                         
+                                    <ul>
+                                        <li>
+                                            <RouterLink to="/Cart">
+                                                Cart
+                                            </RouterLink>
+                                        </li>
+                                        <li>
+                                            <RouterLink to="/Checkout">Checkout</RouterLink>
+                                        </li>
+                                        <li>
+                                            <RouterLink to="/Wishlist">Wishlist</RouterLink>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                
+                        </div>
+                    </li> -->
+                    <li class="text-base leading-10">
                         <RouterLink to="/Contact">Contact</RouterLink>
                     </li>
                 </ul>
@@ -90,6 +90,11 @@ export default {
 
         return {
             menuMobile, subMenuToggle, handleToggle, handleOpenSearch1
+        }
+    },
+    data() {
+        return {
+
         }
     }
 }

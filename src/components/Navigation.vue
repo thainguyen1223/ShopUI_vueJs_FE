@@ -6,7 +6,7 @@
                     </router-link>
                 </li>
                 <!-- mega menu -->
-                <li class="text-base mega-dropdowns">
+                <li class="text-base">
                     <router-link to="/Shop">Shop
                     </router-link>
 

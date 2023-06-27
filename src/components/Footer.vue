@@ -11,9 +11,9 @@
                         <h3 class="my-3 text-lg uppercase">Contact</h3>
                         <ul class="footer-list">
                             <li class="py-2"><a href="https://www.facebook.com/duythai1472">Facebook</a></li>
-                            <li class="py-2 w-72"><a href="#">Location: 148 Nguyen Huu Tho</a></li>
-                            <li class="py-2"><a href="#">Phone: 0794540685</a></li>
-                            <li class="py-2 w-72"><a href="#">Email: duythai147258@gmail.com</a></li>
+                            <li class="py-2 w-72">>Location: 148 Nguyen Huu Tho</li>
+                            <li class="py-2">Phone: 0794540685</li>
+                            <li class="py-2 w-72">Email: duythai147258@gmail.com</li>
                         </ul>
                     </div>
                     <div class="flex flex-col footer-widget">
