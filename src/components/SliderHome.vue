@@ -1,6 +1,6 @@
 <template>
     <div class="slider mb-8">
-        <swiper :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }" :modules="modules" class="swiper-slider">
+        <swiper :autoplay="{ delay: '2000',}" :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }" :modules="modules" class="swiper-slider">
             <swiper-slide lazy="true" v-for="product in products" :key="product.id" class="single-slider">
                 <div class="container mx-auto my-auto slider-home flex">
                     <div class="slider-active acitve flex ">
@@ -43,10 +43,10 @@
 </template>
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue';
-
+import 'swiper/css/autoplay'
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Autoplay, Navigation } from 'swiper';
+import {  Navigation } from "swiper";
 export default {
 
     components: {
@@ -55,10 +55,9 @@ export default {
     },
     data() {
         return {
-
             modules: [
                 Navigation,
-                Autoplay
+              
                  ]
 
 

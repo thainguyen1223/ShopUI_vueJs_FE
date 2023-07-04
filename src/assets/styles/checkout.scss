@@ -134,7 +134,13 @@
     }
   }
 }
-
+  .error{
+    color: red;
+    margin-top: 10  px;
+  }
+  .is-invalid{
+    border-color: red;
+  }
 @media only screen and (max-width: 992px) {
   .your-order{
     width: 100%;

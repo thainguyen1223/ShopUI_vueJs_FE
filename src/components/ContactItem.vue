@@ -54,20 +54,24 @@
                             <div class="contact-flex flex justify-between mb-5 ">
                                 <div class="contact-name">
                                     <input name="name" placeholder="Name*" type="text" v-model="feedback.name">
+                                    <p v-if="feedback.errors.name" class="error ml-2">{{ feedback.errors.name }}</p>
                                 </div>
                           
                                 <div class="contact-email">
                                     <input name="email" placeholder="Email*" type="email" v-model="feedback.email">
+                                    <p v-if="feedback.errors.email" class="error ml-2">{{ feedback.errors.email }}</p>
                                 </div>
                             </div>
 
                             <div class="contact-subject mb-5">
                                 <input name="subject" placeholder="Subject*" type="text" class="w-full outline-none"
                                     v-model="feedback.subject">
+                                
                             </div>
                             <div class="contact-message">
                                 <textarea name="message" placeholder="Your Message*" class="w-full"
                                     v-model="feedback.message"></textarea>
+                                    <span v-if="feedback.errors.message" class="error ml-2">{{ feedback.errors.message }}</span>
                                 <div class="submit" type="submit" @click="summitFeedBack">SEND</div>
                             </div>
                         </div>
@@ -92,7 +96,8 @@ export default {
                 name: "",
                 email: "",
                 subject: "",
-                message: ""
+                message: "",
+                errors:{}
             }
         }
     },
@@ -100,6 +105,23 @@ export default {
         async summitFeedBack() {
             const feedback = { ...this.feedback }
             console.log(feedback);
+            if (feedback.name || feedback.email|| feedback.message 
+            ) {
+                feedback.errors.name = ''
+                feedback.errors.email = ''
+                feedback.errors.message = ''
+            
+            }
+            if (!feedback.name) {
+                feedback.errors.name = 'Name is required.';
+            }
+            if (!feedback.email) {
+                feedback.errors.email = 'Email is required.';
+            }
+            if (!feedback.message) {
+                feedback.errors.message = 'Message is required.';
+            }
+      
             try {
                 const res = await axios.post('http://localhost:3000/feedback',
                     feedback)

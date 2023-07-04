@@ -18,10 +18,10 @@
   .skeleton-loader{
     background-color: #f7f7f7;
     position: relative;
-    width: 340px;
+    width: 550px;
     height: 35.7rem;
     margin-bottom: 1rem;
-  
+
   }
   .skeleton-loader-wrapper {
     position: relative;
@@ -33,7 +33,7 @@
   }
   
   .skeleton-loader-img {
-    width: 100%;
+    width: 80%;
     height: 60%;
    
   }
@@ -41,16 +41,16 @@
     position: absolute;
     width: 90%;
     height: 3rem;
-    top: 22rem;
+    top: 23rem;
     left: 19px;
     border-radius: 0.4rem;
   }
   span .skeleton-loader-price{
     position: absolute;
-    width: 70%;
+    width: 60%;
     height: 3rem;
-    top: 27rem;
-    left: 52px;
+    top: 29rem;
+    left: 106px;
     border-radius: 0.4rem;
   }
 

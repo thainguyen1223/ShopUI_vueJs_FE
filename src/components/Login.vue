@@ -1,16 +1,19 @@
 <template>
     <div class="login-form">
         <form class="flex flex-col">
-            <input type="text" name="user-name" placeholder="Username" v-model="login.email"  >
+            <input type="text" name="user-name" placeholder="Email" v-model="login.email"  >
             <input type="password" name="user-password" placeholder="Password" v-model="login.password">
-            <div class="button-box">
-                <div class="login-toggle-btn">
-                    <input type="checkbox">
-                    <label>Remember me</label>
+   
+                <div class="login-toggle-btn flex justify-between">
+                    <div>
+
+                        <input type="checkbox">
+                        <label>Remember me</label>
+                    </div>
                     <a href="#">Forgot Password?</a>
                 </div>
-                <div @click="fetchData" >Login</div>
-            </div>
+  
+            <div class="button-box mt-3" @click="fetchData" >Login</div>
         </form>
     </div>
 </template>
@@ -35,7 +38,7 @@ export default {
                 const res = await axios.post('http://localhost:3000/auth/login/' ,{email:this.login.email , password:this.login.password});
                 const token = res.data
                 console.log(token);
-                localStorage.setItem('token', token);
+                localStorage.setItem('token', JSON.stringify(token.access_token));
                 if(token){
                     axios.get('http://localhost:3000/profile',{
                         headers:{

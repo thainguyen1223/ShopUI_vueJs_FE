@@ -9,11 +9,15 @@
                             <div class="billing-responsive flex justify-between ">
                                 <div class="billing-info mb-10">
                                     <label>First Name</label>
-                                    <input type="text" v-model="posts.firstname" />
+                                    <input type="text" v-model="posts.firstname"
+                                        :class="{ 'is-invalid': posts.errors.firstname }" />
+                                    <span v-if="posts.errors.firstname" class="error">{{ posts.errors.firstname }}</span>
+
                                 </div>
                                 <div class="billing-info mb-10">
                                     <label>Last Name</label>
                                     <input type="text" v-model="posts.lastname">
+                                    <span v-if="posts.errors.lastname" class="error">{{ posts.errors.lastname }}</span>
                                 </div>
                             </div>
 
@@ -21,16 +25,19 @@
                                 <label>Street Address</label>
                                 <input class="billing-address" placeholder="House number and street name" type="text"
                                     v-model="posts.street">
+                                <span v-if="posts.errors.street" class="error">{{ posts.errors.street }}</span>
                             </div>
 
                             <div class="billing-info mb-10">
                                 <label>Phone</label>
                                 <input type="text" v-model="posts.phone">
+                                <span v-if="posts.errors.phone" class="error">{{ posts.errors.phone }}</span>
                             </div>
 
                             <div class="billing-info mb-10">
                                 <label>Email Address</label>
                                 <input type="email" v-model="posts.email">
+                                <span v-if="posts.errors.email" class="error">{{ posts.errors.email }}</span>
                             </div>
 
                             <div class="additional-info-wrap">
@@ -39,6 +46,8 @@
                                     <label>Order notes</label>
                                     <textarea placeholder="Notes about your order, e.g. special notes for delivery. "
                                         name="message" v-model="posts.additional"></textarea>
+
+                                    <span v-if="posts.errors.additional" class="error">{{ posts.errors.additional }}</span>
                                 </div>
                             </div>
                         </div>
@@ -114,8 +123,9 @@ export default {
                 phone: "",
                 email: "",
                 additional: "",
-                arraySp: []
-            }
+                arraySp: [],
+                errors: {}
+            },
         }
     },
     computed: {
@@ -129,6 +139,7 @@ export default {
     methods: {
         async sendPostRequest() {
             const post = { ...this.posts };
+            ;
             const product = [...this.products]
             let temp = []
             for (let i of product) {
@@ -139,13 +150,40 @@ export default {
             }
             post.arraySp = [...temp]
             console.log(post);
+            if (post.firstname || post.lastname || post.street || post.phone || post.email
+            ) {
+                post.errors.firstname = ''
+                post.errors.lastname = ''
+                post.errors.street = ''
+                post.errors.phone = ''
+                post.errors.email = ''
+            }
+            if (!post.firstname) {
+                post.errors.firstname = 'FirstName is required.';
+            }
+            if (!post.lastname) {
+                post.errors.lastname = 'Lastname is required.';
+            }
+            if (!post.street) {
+                post.errors.street = 'Street is required.';
+            }
+            if (!post.phone ) {
+                post.errors.phone = 'Phone is required.';
+            }
+            if (!post.email) {
+                post.errors.email = 'Email is required.';
+            }
+
+
             try {
                 const res = await axios.post('http://localhost:3000/require-clothes/',
                     post)
                 res.data
+
                 toast.success('Successful order', {
                     autoClose: 1000,
                 });
+
                 console.log(res.data);
             } catch (err) {
                 console.log(err);

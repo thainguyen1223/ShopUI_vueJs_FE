@@ -4,6 +4,7 @@
             <SkeletonLoader />
         </div>
         <div class="product-card" v-else>
+    
             <div class="product-card-img flex items-center justify-center" ref="infinitescrolltrigger">
                 <img :dataSrc="product.images[0]" :alt="product.title" src="" />
                 <img class="hover-image" :dataSrc="product.images[1]" :alt="product.title" src="" />

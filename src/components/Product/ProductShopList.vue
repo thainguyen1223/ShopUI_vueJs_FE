@@ -45,19 +45,9 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import SkeletonLoaderList from '../SkeletonLoader/SkeletonLoaderList.vue';
 
-// import { computed } from 'vue';
-// import { useStore } from 'vuex';
 export default {
     props: ["product",],
-    // setup() {
-    //     const store = useStore();
-    //     store.dispatch("fetchProducts")
 
-    //     const products = computed(() => store.state.products)
-    //     return {
-    //         products,
-    //     }
-    // },
     components: {
         SkeletonLoaderList:SkeletonLoaderList
     },
