@@ -176,7 +176,7 @@ export default {
 
 
             try {
-                const res = await axios.post('http://localhost:3000/require-clothes/',
+                const res = await axios.post('https://shop-ui-vue-js-be.vercel.app/require-clothes/',
                     post)
                 res.data
 

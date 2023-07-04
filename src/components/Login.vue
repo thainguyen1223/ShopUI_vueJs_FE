@@ -35,18 +35,18 @@ export default {
         async fetchData() {
             this.login;
             try {
-                const res = await axios.post('http://localhost:3000/auth/login/' ,{email:this.login.email , password:this.login.password});
+                const res = await axios.post('https://shop-ui-vue-js-be.vercel.app/auth/login/' ,{email:this.login.email , password:this.login.password});
                 const token = res.data
                 console.log(token);
                 localStorage.setItem('token', JSON.stringify(token.access_token));
                 if(token){
-                    axios.get('http://localhost:3000/profile',{
+                    axios.get('https://shop-ui-vue-js-be.vercel.app/profile',{
                         headers:{
                             Authorization:`Bearer ${JSON.parse(token)}`
                         }
                     }).then((res)=>{
                         res.data;
-                        axios.get(`http://localhost:3000/user/all/${res.data.sub}`).then((res) =>{
+                        axios.get(`https://shop-ui-vue-js-be.vercel.app/user/all/${res.data.sub}`).then((res) =>{
                           const profile =res.data
                           localStorage.setItem('profile' ,profile)
                         })

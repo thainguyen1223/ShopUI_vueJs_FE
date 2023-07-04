@@ -201,7 +201,7 @@ const store = createStore({
       try {
         commit("setLoading", true);
         const res = await axios.get(
-          `http://localhost:3000/clothes/?limit=${limit}&page=${page}&queryFilter=${queryFilter}&searchValue=${searchValue}`
+          `https://shop-ui-vue-js-be.vercel.app/clothes/?limit=${limit}&page=${page}&queryFilter=${queryFilter}&searchValue=${searchValue}`
         );
         // const re = []
         // let total = Math.ceil(res.data.total / 4);
@@ -230,7 +230,7 @@ const store = createStore({
       try {
         commit("setLoading", true);
         const res = await axios.get(
-          `http://localhost:3000/clothes/?limit=${limit}&page=${page}&queryFilter=${queryFilter}`
+          `https://shop-ui-vue-js-be.vercel.app/clothes/?limit=${limit}&page=${page}&queryFilter=${queryFilter}`
         );
         // const re = []
         // let total = Math.ceil(res.data.total / 4);
@@ -253,7 +253,7 @@ const store = createStore({
       try {
         commit("setLoading", true);
         const res = await axios.get(
-          `http://localhost:3000/clothes/?limit=${limit}&page=${page}&queryFilter=${queryFilter}`
+          `https://shop-ui-vue-js-be.vercel.app/clothes/?limit=${limit}&page=${page}&queryFilter=${queryFilter}`
         );
         // const re = []
         // let total = Math.ceil(res.data.total / 4);
@@ -270,7 +270,7 @@ const store = createStore({
     },
     async fetchProductDetail({ commit }, { _id }) {
       try {
-        const res = await axios.get("http://localhost:3000/clothes/" + _id);
+        const res = await axios.get("https://shop-ui-vue-js-be.vercel.app/clothes/" + _id);
         console.log(res.data);
         commit("setProductDetail", res.data);
       } catch (err) {
@@ -282,7 +282,7 @@ const store = createStore({
       console.log(dataPayload);
       try {
         const res = await axios.post(
-          `http://localhost:3000/require-clothes/?limit=3&page=1 ,` + dataPayload
+          `https://shop-ui-vue-js-be.vercel.app/require-clothes/?limit=3&page=1 ,` + dataPayload
         );
    
         commit("setRequireClothes", res.data);
@@ -291,16 +291,7 @@ const store = createStore({
       }
     },
 
-    async fetchLogin({commit} , {login}){
-      try{
-        const res = await axios.post('http://localhost:3000/auth/login/' + {email:login.email ,password:login.password});
-        console.log(login);
-        console.log(res.data);  
-        commit("setLogin", res.data);
-      }catch (err){
-        commit("setError", err.message);
-      }
-    },
+
     setLoadingState({ commit }, isLoading) {
       commit("setLoading", isLoading);
     },

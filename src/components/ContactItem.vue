@@ -123,7 +123,7 @@ export default {
             }
       
             try {
-                const res = await axios.post('http://localhost:3000/feedback',
+                const res = await axios.post('https://shop-ui-vue-js-be.vercel.app/feedback',
                     feedback)
                 res.data
                 toast.success('Successful order', {

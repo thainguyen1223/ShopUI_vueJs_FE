@@ -30,7 +30,7 @@ export default {
             const Register ={...this.Register}
             console.log(Register);
             try {
-                const res = await axios.post('http://localhost:3000/user' ,Register );
+                const res = await axios.post('https://shop-ui-vue-js-be.vercel.app/user' ,Register );
                 res.data
                 console.log(res.data);
                 
